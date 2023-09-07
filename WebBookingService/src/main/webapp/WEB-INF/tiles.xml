@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="baseLayout"
+                template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header"
+                       value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer"
+                       value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/index.jsp" />
+    </definition> 
+    <!---->
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/login.jsp" />
+    </definition> 
+    <definition name="user" extends="baseLayout">
+        <put-attribute name="title" value="Trang INFO" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/user.jsp" />
+    </definition>
+    <!---->
+    <definition name="viewCoach" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chỉnh Sửa" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Coachs/viewCoach.jsp" />
+    </definition>
+    <definition name="coachs" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý xe" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Coachs/coachs.jsp" />
+    </definition>
+    
+    <!---->
+    <definition name="viewCoachStrip" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chuyến Đi" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/CoachStrips/viewCoachStrip.jsp" />
+    </definition>
+    <definition name="coachStrips" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chỉnh Sửa" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/CoachStrips/coachStrips.jsp" />
+    </definition>
+    
+    <!---->
+    <definition name="viewStation" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Bến" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Stations/viewStation.jsp" />
+    </definition>
+    <definition name="stations" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chỉnh Sửa" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Stations/stations.jsp" />
+    </definition>
+    
+    <!---->
+    <definition name="viewStaff" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Nhân Viên" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Staffs/viewStaff.jsp" />
+    </definition>
+    <definition name="staffs" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chỉnh Sửa Nhân Viên" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Staffs/staffs.jsp" />
+    </definition>
+    
+    <!---->
+    <definition name="viewCustomer" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Khách Hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Customers/viewCustomer.jsp" />
+    </definition>
+    <definition name="customers" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chỉnh Sửa Khách Hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Customers/customers.jsp" />
+    </definition>
+    
+    <!---->
+    <definition name="viewComment" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Bình Luận Khách Hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Comments/viewComment.jsp" />
+    </definition>
+    <definition name="comments" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Bình Luân Cần Chỉnh Sửa" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Comments/comments.jsp" />
+    </definition>
+    
+    <!---->
+    <definition name="viewGarage" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Nhà Xe" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Garages/viewGarage.jsp" />
+    </definition>
+    <definition name="garages" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Nhà Xe Cần Chỉnh Sửa" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Garages/garages.jsp" />
+    </definition>
+    
+    <!---->
+    <definition name="viewGarageTS" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Nhà Xe" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/GarageTS/viewGarageTS.jsp" />
+    </definition>
+    <definition name="garagetakestrips" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Nhà Xe Cần Chỉnh Sửa" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/GarageTS/garagetakestrips.jsp" />
+    </definition>
+    
+    <!---->
+    <definition name="viewProduct" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Sản Phẩm" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Transport/viewProduct.jsp" />
+    </definition>
+    <definition name="products" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chỉnh Sửa Sản Phẩm" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Transport/products.jsp" />
+    </definition>
+    
+    <!---->
+    <definition name="viewTransporttruck" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chuyến Chở Hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Transport/viewTransporttruck.jsp" />
+    </definition>
+    <definition name="transts" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chỉnh Sửa Chuyến Chở Hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Transport/transts.jsp" />
+    </definition>
+    
+    <!---->
+    <definition name="viewOrderShip" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Vé Chở Hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Transport/viewOrderShip.jsp" />
+    </definition>
+    <definition name="orderships" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chỉnh Sửa Vé Chở Hàng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/Transport/orderships.jsp" />
+    </definition>
+    
+     <!---->
+    <definition name="viewCSCS" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Ghế" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/CSCS/viewCSCS.jsp" />
+    </definition>
+    <definition name="cscs" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chỉnh Sửa Ghế" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/CSCS/cscs.jsp" />
+    </definition>
+    
+     <!---->
+    <definition name="viewTicket" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Vé" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/CSCS/viewTicket.jsp" />
+    </definition>
+    <definition name="tickets" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Chỉnh Sửa Vé" />
+        <put-attribute name="content"
+                       value="/WEB-INF/pages/CSCS/tickets.jsp" />
+    </definition>
+    
+     <!---->
+    <definition name="stas" extends="baseLayout">
+        <put-attribute name="title" value="Thống kê - báo cáo" />
+        <put-attribute name="content" value="/WEB-INF/pages/stas.jsp" />
+    </definition>
+    
+<!--    
+    <definition name="users" extends="base">
+        <put-attribute name="title" value="Nhân Viên" />
+        <put-attribute name="content" value="/WEB-INF/pages/users.jsp" />
+    </definition>
+    
+    <definition name="infoUser" extends="base">
+        <put-attribute name="title" value="Thông tin tài khoản" />
+        <put-attribute name="content" value="/WEB-INF/pages/infoUser.jsp" />
+    </definition>
+
+    <definition name="register" extends="base">
+        <put-attribute name="title" value="Đăng Ký Khám Bệnh" />
+        <put-attribute name="content" value="/WEB-INF/pages/register.jsp" />
+    </definition>-->
+    
+</tiles-definitions>

@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+*{
+  padding: auto;
+  margin: auto;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+/*Color $ style*/
+:root{
+  --PrimaryColor: hsl(199, 100%, 33%);
+  --SecondaryColor: hsl(187, 85%, 43% );
+  --gradientColor: linear-gradient(to right, hsl(187, 85%, 43%),hsl(199, 100%, 33%));
+  --whiteColor: hsl(0, 0%, 100%);
+  --textColor: hsl(240, 4%, 36%);
+  --greyText: rgb(190, 190, 190);
+  --inputColor: rgb(239, 239,239);
+  --bodyColor: rgb(240,240,246);
+  --cardBG: rgb(225,225,235);
+
+}
+a{
+  text-decoration: none;
+  
+}
+li{
+  list-style: none;
+}
+
+.section{
+  background-origin: padding-box; 
+  text-align: center;
+}
+
+.container{
+  
+  margin-top: auto   ;
+  margin-bottom: auto;
+  margin-left: 0%;
+  margin-right: 0%; 
+  background-color:var(--PrimaryColor) ;
+}
+
+.icon{
+  font-size: 2rem;
+  cursor: pointer ;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.btn{
+  padding: .6rem 1.5rem;
+  background: var(--gradientColor);
+  border-radius: 3rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn a{
+  color: var(--whiteColor);
+  font-weight: 500;
+}
+
+.btn:hover{
+  background: var(--SecondaryColor);
+}
+img, video{
+  width: 100%;
+  height: auto;
+}
+
+input{
+  width: 300;
+  height: 300;
+}
+
+body{
+  background:var(--bodyColor);
+  
+
+}
+
+form{
+  width: 500px;
+  height: 300px;
+  margin: auto;
+}
