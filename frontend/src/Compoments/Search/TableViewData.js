@@ -29,7 +29,7 @@ export default function TableViewData({ columns, mData }) {
     onGlobalFilterChange: setFiltering,
   });
   return (
-    <div className="w-11/12 h-auto m-auto ">
+    <div className="w-11/12 h-auto m-auto " class>
       <div className="flex flex-col overflow-x-auto border border-gray-500">
         <div className="sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">

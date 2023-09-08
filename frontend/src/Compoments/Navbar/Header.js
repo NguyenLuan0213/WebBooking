@@ -3,10 +3,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link, Navigate } from 'react-router-dom';
-import MyUserReduce from '../reducers/MyUserReduce';
-import { Button, NavDropdown } from 'react-bootstrap';
 import { MyUserContext } from '../Layout';
-
+import { Button } from 'react-bootstrap';
+import { FaBorderAll } from 'react-icons/fa6';
 const Header = () => {
     const [user, state] = useContext(MyUserContext)
     const [exit, setExit] = useState(false)
@@ -17,19 +16,22 @@ const Header = () => {
     }
 
     return (
-        <Navbar bg="light" variant="light">
-            <Container>
-                <Navbar.Brand href="/">WebBookingServer</Navbar.Brand>
-                <Nav className="me-auto">
-
-                    {user !== null && user.userRole === 'ADMIN' && (
+        <div className='header'>
+            <div className='container'>
+                
+                
+               <Navbar.Brand href="/" className='logo'>Home</Navbar.Brand>   
+              <div className='button'>
+               <Button className="nav-link"><Link to="/search"className='text'>Search</Link></Button>
+               <Button className="nav-link"><Link to="/feedback" className='text'>FeedBack</Link></Button>
+               <Button className="nav-link"><Link to="/api/cscs"className='text' >CSCS</Link></Button>
+               </div>
+                   {user !== null && user.userRole === 'ADMIN' && (
                         <>
-                            <Link to="/search" className="nav-link">Search</Link>
-                            <Link to="/feedback" className="nav-link">FeedBack</Link>
-                            <Link to="/api/cscs" className="nav-link">CSCS</Link>
+                            
                         </>
                     )}
-                </Nav>
+                
                 <Navbar.Collapse className="justify-content-end">
                     {user === null || user === undefined ? (
                         <>
@@ -43,8 +45,11 @@ const Header = () => {
                         </>
                     )}
                 </Navbar.Collapse>
-            </Container>
-        </Navbar>
+                
+                
+                
+            </div>
+            </div>
     );
 }
 

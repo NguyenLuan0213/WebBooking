@@ -15,6 +15,7 @@ export const MyUserContext = createContext();
 
 export default function Layout() {
   const [user, state] = useReducer(MyUserReduce, cookie.load('user') || null)
+ 
 
   return (
     <div>
@@ -33,6 +34,7 @@ export default function Layout() {
           </div>
         </Router>
       </MyUserContext.Provider >
+    
     </div>
   );
 }

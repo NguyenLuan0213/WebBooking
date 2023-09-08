@@ -19,7 +19,7 @@ function FeedbackLayout() {
             id="exampleFormControlTextarea1"
             rows="5" />
         </div></>
-        <Button variant="contained" type="submit" onClick={FeedbackSubmit}>Send</Button>
+        <Button variant="contained" type="submit" onClick={FeedbackSubmit} className="btn">Send</Button>
     </form>
     <ToastContainer
         position="top-center"
