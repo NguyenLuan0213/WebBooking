@@ -110,9 +110,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedPage("/login?accessDenied");
 
         http.authorizeRequests().antMatchers("/").permitAll()
-//                .antMatchers("/admin/**").hasAnyRole("STAFF", "ADMIN", "OWNER")
-                //                                .antMatchers("/customer/**").hasAnyRole("CUSTOMER");
-
                 .antMatchers("/admin/**").
                 hasAuthority(Staff.ADMIN)
                 .antMatchers("/customer/**").

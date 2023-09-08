@@ -56,9 +56,6 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 
     @Autowired
     private Environment env;
-    
-    @Autowired
-    private CSCSService cscsService;
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import Header from './Navbar/Header';
 import Home from './Home/Home';
-import LoginStaff from './Login/loginStaff';
-import LoginCus from './Login/loginCus';
+import Login from './Login/login';
+// import LoginCus from './Login/loginCus';
 import SearchLayout from './Search/Search';
 import FeedbackLayout from './Feedback/Feedback';
 import MyUserReduce from './reducers/MyUserReduce';
@@ -27,8 +27,8 @@ export default function Layout() {
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<SearchLayout />} />
               <Route path="/feedback" element={<FeedbackLayout />} />
-              <Route path="/login/staff" element={<LoginStaff />} />
-              <Route path="/login/customer" element={<LoginCus />} />
+              <Route path="/login/" element={<Login />} />
+              {/* <Route path="/login/customer" element={<LoginCus />} /> */}
               <Route path="/admin/cscs" element={<CSCS />} />
             </Routes>
           </div>

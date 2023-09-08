@@ -8,7 +8,7 @@ import { Navigate } from 'react-router-dom';
 import cookie from "react-cookies";
 import 'react-toastify/dist/ReactToastify.css'
 
-const LoginStaff = () => {
+const Login = () => {
   const [username, setUsername] = useState()
   const [password, setPassword] = useState()
   const [currentUser, state] = useContext(MyUserContext)
@@ -16,7 +16,7 @@ const LoginStaff = () => {
     evt.preventDefault()
     const process = async () => {
       try {
-        let res = await apis.post(endpoints['loginStaff'], {
+        let res = await apis.post(endpoints['login'], {
           "username": username,
           "password": password
         })
@@ -57,4 +57,4 @@ const LoginStaff = () => {
   )
 }
 
-export default LoginStaff 
+export default Login 

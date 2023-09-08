@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0"> 
 
-                    <se:authorize access="hasAnyRole('STAFF', 'ADMIN','OWNER')">
+                    <se:authorize access="hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN','ROLE_OWNER')">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Garage
