@@ -65,6 +65,7 @@ public class JWTAuthenticationTokenFilter extends UsernamePasswordAuthentication
 
                         ud = new org.springframework.security.core.userdetails.User(username, staff.getPassWord(), enable, accountNonExpired,
                                 accountCredentialNonExpired, accountNonLocked, authorities);
+                        System.out.println(ud);
                     }
                 } else {
                     Customer customer = cusService.getCurrentCustomer(username);
@@ -80,6 +81,7 @@ public class JWTAuthenticationTokenFilter extends UsernamePasswordAuthentication
 
                             ud = new org.springframework.security.core.userdetails.User(username, customer.getPassWord(), enable, accountNonExpired,
                                     accountCredentialNonExpired, accountNonLocked, authorities);
+                            System.out.println(ud);
                         }
                     }
                 }

@@ -252,7 +252,7 @@ public class StaffRepositoryImpl implements StaffRepository {
     @Override
     public Staff getCurrentStaff(String username) {
         Session s = this.Factory.getObject().getCurrentSession();
-        Query q = s.createQuery("FROM Staff s WHERE s.userName = :staff");
+        Query q = s.createQuery("SELECT s FROM Staff s WHERE s.userName = :staff");
         q.setParameter("staff", username);
 
         List<Staff> staffList = q.getResultList();

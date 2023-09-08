@@ -21,12 +21,11 @@ const Header = () => {
             <Container>
                 <Navbar.Brand href="/">WebBookingServer</Navbar.Brand>
                 <Nav className="me-auto">
-
-                    {user !== null && user.userRole === 'ADMIN' && (
+                    {user !== null && user.userRole === 'ROLE_ADMIN' && (
                         <>
-                            <Link to="/search" className="nav-link">Search</Link>
+                            <Button><Link to="/search" className="nav-link">Search</Link></Button>
                             <Link to="/feedback" className="nav-link">FeedBack</Link>
-                            <Link to="/api/cscs" className="nav-link">CSCS</Link>
+                            <Link to="/admin/cscs" className="nav-link">CSCS</Link>
                         </>
                     )}
                 </Nav>
@@ -34,11 +33,11 @@ const Header = () => {
                     {user === null || user === undefined ? (
                         <>
                             <Link to="/register" className="btn btn-danger mx-2">Đăng Ký</Link>
-                            <Link to="/login/staff" className="btn btn-success">Đăng Nhập</Link>
+                            <Link to="/login/" className="btn btn-success">Đăng Nhập</Link>
                         </>
                     ) : (
                         <>
-                            <span className="navbar-text mx-2">Chào {user.fullName}</span>
+                            <span className="navbar-text mx-2">Chào {user.nameStaff}</span>
                             <button onClick={logout} className="btn btn-secondary">Đăng xuất</button>
                         </>
                     )}

@@ -13,7 +13,6 @@ import com.web.pojo.Staff;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,7 +21,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  *
@@ -30,16 +28,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableWebSecurity
-@EnableTransactionManagement
 @ComponentScan(basePackages = {
     "com.web.controllers",
     "com.web.repository",
     "com.web.service",
-    "com.web.configs",
-    "com.web.formatters",
-    "com.web.handlers"
+    "com.web.components"
 })
-@PropertySource("classpath:configs.properties")
 @Order(1)
 public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -74,6 +68,9 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api").permitAll()
                 .antMatchers("/api/login/").permitAll()
                 .antMatchers("/api/register/").permitAll()
+                .antMatchers("/api/current-user/").permitAll()
+                .antMatchers("/api/current-customer/").permitAll()
+//                .antMatchers("/api/current-user-roles/").permitAll()
                 .antMatchers("/api/admin/**").hasAuthority(Staff.ADMIN)
                 .antMatchers("/api/staff/**").hasAuthority(Staff.STAFF)
                 .antMatchers("/api/owner/**").hasAuthority(Staff.OWNER)
@@ -86,7 +83,9 @@ public class JWTSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/admin/**").hasAuthority(Staff.ADMIN)
+                .antMatchers("/api/current-user/").permitAll()
+                .antMatchers("/api/current-user/").permitAll()
+//                .antMatchers("/api/current-user-roles/").permitAll()
                 .antMatchers("/api/staff/**").hasAuthority(Staff.STAFF)
                 .antMatchers("/api/customer/**").hasAuthority(Customer.CUSTOMER)
                 .and()
