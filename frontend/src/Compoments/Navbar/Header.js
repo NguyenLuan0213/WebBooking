@@ -21,6 +21,8 @@ const Header = () => {
         <Navbar.Brand href="/" className="logo">
           Home
         </Navbar.Brand>
+
+        {user !== null && user.roles === "ROLE_ADMIN" && <></>}
         <div className="button">
           <Button className="nav-link">
             <Link to="/search" className="text">
@@ -38,8 +40,6 @@ const Header = () => {
             </Link>
           </Button>
         </div>
-        {user !== null && user.userRole === "ADMIN" && <></>}
-
         <Navbar.Collapse className="justify-content-end">
           {user === null || user === undefined ? (
             <>
