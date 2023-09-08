@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/cscs")
+
 public class ApiCSCSController {
 
     @Autowired
@@ -41,8 +41,8 @@ public class ApiCSCSController {
     @Autowired
     private CoachStripsService csService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/api/admin/cscs", method = RequestMethod.POST)
+    @CrossOrigin(origins = {"http://localhost:3000/"})
     public ResponseEntity<List<Coachstripcoachseat>> getCoachstripcoachseats(@RequestParam(required = false) Map<String, String> params) {
         List<Coachstripcoachseat> coachstripcoachseats = csccService.getCoachstripcoachseat(params);
         List<Staff> staff = staffService.getStaffs(params);

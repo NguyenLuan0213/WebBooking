@@ -5,7 +5,9 @@
 package com.web.filters;
 
 import com.web.components.JWTService;
+import com.web.pojo.Customer;
 import com.web.pojo.Staff;
+import com.web.service.CustomerService;
 import com.web.service.StaffService;
 import java.io.IOException;
 import java.text.ParseException;
@@ -38,6 +40,8 @@ public class JWTAuthenticationTokenFilter extends UsernamePasswordAuthentication
     private JWTService jWTService;
     @Autowired
     private StaffService staffService;
+    @Autowired
+    private CustomerService cusService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -46,19 +50,41 @@ public class JWTAuthenticationTokenFilter extends UsernamePasswordAuthentication
         try {
             if (jWTService.validateTokenLogin(authToken)) {
                 String username = jWTService.getUsernameFromToken(authToken);
-                Staff staff = this.staffService.getCurrentStaff(username);
-                if (staff != null) {
-                    boolean enable = true;
-                    boolean accountNonExpired = true;
-                    boolean accountcredentialNonExpired = true;
-                    boolean accountNonLocked = true;
 
-                    Set<GrantedAuthority> authorities = new HashSet<>();
-                    authorities.add((new SimpleGrantedAuthority(staff.getRoles().getNameRoles())));
+                UserDetails ud = null;
+                if (staffService.isStaffUser(username)) {
+                    Staff staff = staffService.getCurrentStaff(username);
+                    if (staff != null) {
+                        boolean enable = true;
+                        boolean accountNonExpired = true;
+                        boolean accountCredentialNonExpired = true;
+                        boolean accountNonLocked = true;
 
-                    UserDetails ud = new org.springframework.security.core.userdetails.User(username, staff.getPassWord(), enable, accountNonExpired,
-                            accountcredentialNonExpired, accountNonLocked, authorities);
+                        Set<GrantedAuthority> authorities = new HashSet<>();
+                        authorities.add(new SimpleGrantedAuthority(staff.getRoles().getNameRoles()));
 
+                        ud = new org.springframework.security.core.userdetails.User(username, staff.getPassWord(), enable, accountNonExpired,
+                                accountCredentialNonExpired, accountNonLocked, authorities);
+                    }
+                } else {
+                    Customer customer = cusService.getCurrentCustomer(username);
+                    if (cusService.isCustomerUser(username)) {
+                        if (customer != null) {
+                            boolean enable = true;
+                            boolean accountNonExpired = true;
+                            boolean accountCredentialNonExpired = true;
+                            boolean accountNonLocked = true;
+
+                            Set<GrantedAuthority> authorities = new HashSet<>();
+                            authorities.add(new SimpleGrantedAuthority("CUSTOMER"));
+
+                            ud = new org.springframework.security.core.userdetails.User(username, customer.getPassWord(), enable, accountNonExpired,
+                                    accountCredentialNonExpired, accountNonLocked, authorities);
+                        }
+                    }
+                }
+
+                if (ud != null) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(ud, null, ud.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpRequest));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
