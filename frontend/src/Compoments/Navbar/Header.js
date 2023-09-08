@@ -22,24 +22,25 @@ const Header = () => {
           Home
         </Navbar.Brand>
 
-        {user !== null && user.roles === "ROLE_ADMIN" && <></>}
-        <div className="button">
-          <Button className="nav-link">
-            <Link to="/search" className="text">
-              Search
-            </Link>
-          </Button>
-          <Button className="nav-link">
-            <Link to="/feedback" className="text">
-              FeedBack
-            </Link>
-          </Button>
-          <Button className="nav-link">
-            <Link to="/api/cscs" className="text">
-              CSCS
-            </Link>
-          </Button>
-        </div>
+        {user !== null && user.roles === "ROLE_ADMIN" ? <>
+          <div className="button">
+            <Button className="nav-link">
+              <Link to="/search" className="text">
+                Search
+              </Link>
+            </Button>
+            <Button className="nav-link">
+              <Link to="/feedback" className="text">
+                FeedBack
+              </Link>
+            </Button>
+            <Button className="nav-link">
+              <Link to="/api/cscs" className="text">
+                CSCS
+              </Link>
+            </Button>
+          </div></> : <span></span>
+        }
         <Navbar.Collapse className="justify-content-end">
           {user === null || user === undefined ? (
             <>
