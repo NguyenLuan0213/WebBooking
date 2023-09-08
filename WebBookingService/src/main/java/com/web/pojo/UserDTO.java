@@ -11,8 +11,6 @@ package com.web.pojo;
 public class UserDTO {
 
     private Staff staff;
-    private Roles roles;
-
     // Getter và setter cho staff và customer
     public Staff getStaff() {
         return staff;
@@ -30,11 +28,11 @@ public class UserDTO {
 //        this.customer = customer;
 //    }
 
-    public Roles getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Roles roles) {
-        this.roles = roles;
-    }
+//    public Roles getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Roles roles) {
+//        this.roles = roles;
+//    }
 }

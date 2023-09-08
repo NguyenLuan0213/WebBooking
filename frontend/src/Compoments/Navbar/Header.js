@@ -21,7 +21,7 @@ const Header = () => {
             <Container>
                 <Navbar.Brand href="/">WebBookingServer</Navbar.Brand>
                 <Nav className="me-auto">
-                    {user !== null && user.userRole === 'ROLE_ADMIN' && (
+                    {user !== null && user.roles === 'ROLE_ADMIN' && (
                         <>
                             <Button><Link to="/search" className="nav-link">Search</Link></Button>
                             <Link to="/feedback" className="nav-link">FeedBack</Link>

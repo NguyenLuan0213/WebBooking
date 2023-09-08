@@ -84,7 +84,7 @@ public class StaffRepositoryImpl implements StaffRepository {
             }
              String roles = params.get("roles");
             if (roles != null && !roles.isEmpty()) {
-                Predicate rolesPredicate = b.equal(root.get("roles").get("nameRoles"), roles);
+                Predicate rolesPredicate = b.equal(root.get("roles"), roles);
                 predicates.add(rolesPredicate);
             }
 
@@ -214,7 +214,7 @@ public class StaffRepositoryImpl implements StaffRepository {
     public List<Object[]> getUserByStaffRole(String staffRole) {
         Session s = this.Factory.getObject().getCurrentSession();
         Query q;
-        q = s.createQuery("SELECT s.idStaff, s.addressUser, s.nameStaff, s.gender, s.phone FROM Staff s WHERE s.roles.nameRoles = :role");
+        q = s.createQuery("SELECT s.idStaff, s.addressUser, s.nameStaff, s.gender, s.phone FROM Staff s WHERE s.roles = :role");
         q.setParameter("role", staffRole);
         return q.getResultList();
     }
@@ -242,7 +242,7 @@ public class StaffRepositoryImpl implements StaffRepository {
     public List<Object[]> getUserByUserRoleAndName(String staffRole, String name) {
         Session s = this.Factory.getObject().getCurrentSession();
         String sql;
-        sql = "SELECT s.idStaff, s.addressUser, s.nameStaff, s.gender, s.phone FROM Staff s WHERE s.roles.nameRoles = :role AND s.nameStaff LIKE :key";
+        sql = "SELECT s.idStaff, s.addressUser, s.nameStaff, s.gender, s.phone FROM Staff s WHERE s.roles = :role AND s.nameStaff LIKE :key";
         Query q = s.createQuery(sql);
         q.setParameter("key", '%' + name + '%');
         q.setParameter("role", staffRole);

@@ -56,7 +56,7 @@
         <c:url value="/" var="searchUrl">
             <c:param name="idStaff" value="${staf.idStaff}" /> 
         </c:url>   
-        <a href="${searchUrl}" style="display: none">${staf.nameStaff || staf.gender || staf.phone || staf.addressUser || staf.roles.nameRoles}</a>
+        <a href="${searchUrl}" style="display: none">${staf.nameStaff || staf.gender || staf.phone || staf.addressUser || staf.roles}</a>
     </c:forEach>
 
 
@@ -88,7 +88,7 @@
                             <div class="table-cell ">${staf.phone}</div>
                             <div class="table-cell ">${staf.brithStaff}</div>
                             <div class="table-cell ">${staf.addressUser}</div>
-                            <div class="table-cell ">${staf.roles.nameRoles}</div>
+                            <div class="table-cell ">${staf.roles}</div>
                             <se:authorize access="hasAnyRole('STAFF', 'ADMIN')">
                                 <div class="table-cell ">${staf.userName}</div>
                                 <div class="table-cell " type="password">${staf.passWord}</div>

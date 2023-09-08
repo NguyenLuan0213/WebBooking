@@ -45,7 +45,7 @@ public class StaffServiceImpl implements StaffService {
 
         Staff s = staffs.get(0);
         Set<GrantedAuthority> authoritys = new HashSet<>();
-        authoritys.add(new SimpleGrantedAuthority(s.getRoles().getNameRoles()));
+        authoritys.add(new SimpleGrantedAuthority(s.getRoles()));
         return new org.springframework.security.core.userdetails
                 .User(s.getUserName(), s.getPassWord(), authoritys);
     }

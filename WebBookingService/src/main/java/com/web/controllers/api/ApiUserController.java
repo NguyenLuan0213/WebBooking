@@ -8,7 +8,6 @@ import com.cloudinary.Cloudinary;
 import com.web.components.JWTService;
 import com.web.pojo.Customer;
 import com.web.pojo.LoginRequest;
-import com.web.pojo.Roles;
 import com.web.pojo.Staff;
 import com.web.pojo.UserDTO;
 import com.web.service.CustomerService;
