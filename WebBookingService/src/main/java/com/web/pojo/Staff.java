@@ -94,16 +94,14 @@ public class Staff implements Serializable {
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 20)
     @Column(name = "phone")
     private String phone;
     @Size(max = 250)
     @Column(name = "imgStaff")
     private String imgStaff;
-//    @JoinColumn(name = "roles", referencedColumnName = "nameRoles")
-//    @ManyToOne
-//    @JsonIgnore
-//    private Roles roles;
 
     @OneToMany(mappedBy = "idStaffDrive")
     @JsonIgnore
@@ -259,12 +257,6 @@ public class Staff implements Serializable {
     public void setTransporttruckList(List<Transporttruck> transporttruckList) {
         this.transporttruckList = transporttruckList;
     }
-//    public Roles getRoles() {
-//        return roles;
-//    }
-//    public void setRoles(Roles roles) {
-//        this.roles = roles;
-//    }
 
     public String getPassWord() {
         return passWord;
