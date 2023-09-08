@@ -10,7 +10,7 @@ import MyUserReduce from './reducers/MyUserReduce';
 import cookie from "react-cookies";
 import CSCS from './CSCS';
 import { createContext, useReducer } from 'react';
-
+import SignUpLayout from './SignUp/signup';
 export const MyUserContext = createContext();
 
 export default function Layout() {
