@@ -1,4 +1,4 @@
- /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -22,6 +22,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -46,8 +47,7 @@ public class StaffServiceImpl implements StaffService {
         Staff s = staffs.get(0);
         Set<GrantedAuthority> authoritys = new HashSet<>();
         authoritys.add(new SimpleGrantedAuthority(s.getRoles()));
-        return new org.springframework.security.core.userdetails
-                .User(s.getUserName(), s.getPassWord(), authoritys);
+        return new org.springframework.security.core.userdetails.User(s.getUserName(), s.getPassWord(), authoritys);
     }
 
     @Override
@@ -62,9 +62,10 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public boolean addOrUpdateStaff(Staff staf) {
-        if (!staf.getFile().isEmpty()) {
+        MultipartFile file = staf.getFile();
+        if (file != null && !file.isEmpty()) {
             try {
-                Map res = this.cloudinary.uploader().upload(staf.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+                Map res = this.cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap("resource_type", "auto"));
                 staf.setImgStaff(res.get("secure_url").toString());
             } catch (IOException ex) {
                 Logger.getLogger(StaffServiceImpl.class.getName()).log(Level.SEVERE, null, ex);

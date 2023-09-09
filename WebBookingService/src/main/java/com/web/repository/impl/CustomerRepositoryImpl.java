@@ -60,9 +60,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
             String kw = params.get("kw");
             if (kw != null && !kw.isEmpty()) {
-                predicates.add(b.like(root.get("name").as(String.class), String.format("%%%s%%", kw)));
-                predicates.add(b.equal(root.get("phoneNumber").as(String.class), String.format("%%%s%%", kw)));
-                predicates.add(b.equal(root.get("addressCus").as(String.class), String.format("%%%s%%", kw)));
+                Predicate namePredicate = b.like(root.get("name").as(String.class), String.format("%%%s%%", kw));
+                Predicate phonePredicate = b.equal(root.get("phoneNumber").as(String.class), String.format("%%%s%%", kw));
+                Predicate addressPredicate = b.like(root.get("addressCus").as(String.class), String.format("%%%s%%", kw));
+                predicates.add(b.or(addressPredicate, namePredicate, phonePredicate));
             }
 
             q.where(predicates.toArray(Predicate[]::new));

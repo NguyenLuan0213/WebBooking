@@ -76,12 +76,6 @@
                 </c:forEach>
             </tbody>
         </table>
-        <div class="text-end">
-            <se:authorize access="hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')">
-                <c:url value="/viewCustomer/admin/customers/${cus.idCustomer}" var="api" />
-                <a href="${api}" class="btn btn-primary" >Thêm Khách Hàng</a>
-            </se:authorize>
-        </div>
     </section>
 </section>
 <script src="<c:url value="/js/main.js" />"></script>

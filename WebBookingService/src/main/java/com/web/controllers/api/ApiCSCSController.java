@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-
+@CrossOrigin(origins = "http://localhost:3000")
 public class ApiCSCSController {
 
     @Autowired
@@ -41,8 +41,7 @@ public class ApiCSCSController {
     @Autowired
     private CoachStripsService csService;
 
-    @RequestMapping(value = "/api/admin/cscs", method = RequestMethod.POST)
-    @CrossOrigin(origins = {"http://localhost:3000/"})
+    @RequestMapping(value = "/api/cscs", method = RequestMethod.GET)
     public ResponseEntity<List<Coachstripcoachseat>> getCoachstripcoachseats(@RequestParam(required = false) Map<String, String> params) {
         List<Coachstripcoachseat> coachstripcoachseats = csccService.getCoachstripcoachseat(params);
         List<Staff> staff = staffService.getStaffs(params);
@@ -52,8 +51,7 @@ public class ApiCSCSController {
         return new ResponseEntity<>(coachstripcoachseats, HttpStatus.OK);
     }
 
-    @GetMapping("/{idCSCS}")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/api/{idCSCS}", method = RequestMethod.POST)
     public ResponseEntity<Coachstripcoachseat> getCoachstripcoachseat(@PathVariable int idCSCS) {
         Coachstripcoachseat coachstripcoachseat = csccService.getCoachstripcoachseatById(idCSCS);
         if (coachstripcoachseat != null) {
@@ -64,7 +62,6 @@ public class ApiCSCSController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Coachstripcoachseat> addCoachstripcoachseat(@RequestBody Coachstripcoachseat coachstripcoachseat) {
         boolean result = csccService.addOrUpdateCoachstripcoachseat(coachstripcoachseat);
         if (result) {
@@ -74,8 +71,7 @@ public class ApiCSCSController {
         }
     }
 
-    @PutMapping("/{idCSCS}")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/api/{idCSCS}", method = RequestMethod.PUT)
     public ResponseEntity<Coachstripcoachseat> updateCoachstripcoachseat(@PathVariable int idCSCS, @RequestBody Coachstripcoachseat coachstripcoachseat) {
         coachstripcoachseat.setIdCSCS(idCSCS);
         boolean result = csccService.addOrUpdateCoachstripcoachseat(coachstripcoachseat);
@@ -85,9 +81,9 @@ public class ApiCSCSController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @DeleteMapping("/{idCSCS}")
-    @CrossOrigin(origins = "http://localhost:3000")
+    
+    
+    @RequestMapping(value = "/api/{idCSCS}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteCoachstripcoachseat(@PathVariable int idCSCS) {
         boolean result = csccService.deleteCoachstripcoachseat(idCSCS);
         if (result) {

@@ -11,9 +11,6 @@ import com.web.service.CoachsService;
 import com.web.service.StaffService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,15 +83,15 @@ public class CSCSController {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date dateDepartureTime = dateFormat.parse(csc.getFormattedDepartureTime());
                 csc.setDepartureTime(dateDepartureTime);
-
-                System.out.println(csc.getDepartureTime());
-                boolean canBook = canBookCoachstripcoachseat(csc);
-                System.out.println(canBook);
-                if (!canBook) {
-                    String errorMessage = "Không thể đặt vé cho lịch trình này. Thời gian khởi hành đã qua hoặc gần đây.";
-                    rs.rejectValue("departureTime", "error.cannotBook", errorMessage);
-                    return "cscs";
-                }
+//
+//                System.out.println(csc.getDepartureTime());
+//                boolean canBook = canBookCoachstripcoachseat(csc);
+//                System.out.println(canBook);
+//                if (!canBook) {
+//                    String errorMessage = "Không thể đặt vé cho lịch trình này. Thời gian khởi hành đã qua hoặc gần đây.";
+//                    rs.rejectValue("departureTime", "error.cannotBook", errorMessage);
+//                    return "cscs";
+//                }
 
                 if (this.cscsService.addOrUpdateCoachstripcoachseat(csc)) {
                     return "redirect:/viewCSCS";
@@ -114,35 +111,35 @@ public class CSCSController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    private boolean canBookCoachstripcoachseat(Coachstripcoachseat csc) {
-        if (csc == null || csc.getIdCSCS() == null) {
-            return false;
-        }
-
-        LocalDateTime currentTime = LocalDateTime.now();
-        LocalDateTime fiveMinutesAgo = currentTime.minusMinutes(5);
-        
-        System.out.println();
-        Date departureTime = csc.getDepartureTime();
-
-        // Kiểm tra xem departureTime đã được đặt hay chưa
-        if (departureTime == null) {
-            // Nếu departureTime chưa được đặt, bạn có thể xem đây là trường hợp không h0 aqợp lệ
-            return false;
-        }
-
-        Instant instant = departureTime.toInstant();
-        ZoneId zoneId = ZoneId.systemDefault();
-        LocalDateTime departureLocalDateTime = instant.atZone(zoneId).toLocalDateTime();
-
-        if (departureLocalDateTime.isBefore(currentTime) || departureLocalDateTime.isBefore(fiveMinutesAgo)) {
-            // Thời gian khởi hành của bản ghi đã qua 5 phút so với thời gian hiện tại,
-            // không cho phép đặt vé.
-            return false;
-        }
-
-        // Bản ghi có thể được đặt vé.
-        return true;
-    }
+//    private boolean canBookCoachstripcoachseat(Coachstripcoachseat csc) {
+//        if (csc == null || csc.getIdCSCS() == null) {
+//            return false;
+//        }
+//
+//        LocalDateTime currentTime = LocalDateTime.now();
+//        LocalDateTime fiveMinutesAgo = currentTime.minusMinutes(5);
+//        
+//        System.out.println();
+//        Date departureTime = csc.getDepartureTime();
+//
+//        // Kiểm tra xem departureTime đã được đặt hay chưa
+//        if (departureTime == null) {
+//            // Nếu departureTime chưa được đặt, bạn có thể xem đây là trường hợp không h0 aqợp lệ
+//            return false;
+//        }
+//
+//        Instant instant = departureTime.toInstant();
+//        ZoneId zoneId = ZoneId.systemDefault();
+//        LocalDateTime departureLocalDateTime = instant.atZone(zoneId).toLocalDateTime();
+//
+//        if (departureLocalDateTime.isBefore(currentTime) || departureLocalDateTime.isBefore(fiveMinutesAgo)) {
+//            // Thời gian khởi hành của bản ghi đã qua 5 phút so với thời gian hiện tại,
+//            // không cho phép đặt vé.
+//            return false;
+//        }
+//
+//        // Bản ghi có thể được đặt vé.
+//        return true;
+//    }
 
 }

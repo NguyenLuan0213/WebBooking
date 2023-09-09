@@ -26,6 +26,13 @@
                 </c:forEach>
         </ul>
     </c:if>
+    
+    <c:forEach items="${customers}" var="cus">
+        <c:url value="/" var="searchUrl">
+            <c:param name="idCusomer" value="${cus.idCustomer}" /> 
+        </c:url>   
+        <a href="${searchUrl}" style="display: none">${cus.name}</a>
+    </c:forEach>
 
 
     <div class="text-end mb-3">

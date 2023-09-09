@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -62,25 +63,6 @@ public class ApiUserController {
         return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @RequestMapping(value = "/api/user/{id}/", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Staff> getUserById(@PathVariable(value = "id") int id) {
-        return new ResponseEntity<>(this.staffService.getStaffById(id),
-                HttpStatus.OK);
-    }
-
-//    @RequestMapping(value = "/api/current-user/", produces = {MediaType.APPLICATION_JSON_VALUE})
-//    public ResponseEntity<UserDTO> getCurrentUserAndRoles(Principal user) {
-//        UserDTO userDTO = new UserDTO();
-//
-//        Staff staff = this.staffService.getCurrentStaff(user.getName());
-//        if (staff != null) {
-//            userDTO.setStaff(staff);
-//            userDTO.setRoles(staff.getRoles()); // Bổ sung vai trò vào DTO
-//        }
-//
-//        return new ResponseEntity<>(userDTO, HttpStatus.OK);
-//    }
-
     @RequestMapping(value = "/api/current-user/", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Staff> currentUser(Principal user) {
         Staff sta = this.staffService.getCurrentStaff(user.getName());
@@ -91,6 +73,52 @@ public class ApiUserController {
     public ResponseEntity<Customer> currentCustomer(Principal user) {
         Customer cus = this.customerService.getCurrentCustomer(user.getName());
         return new ResponseEntity<>(cus, HttpStatus.OK);
+    }
+
+    // API để lấy danh sách nhân viên với tùy chọn tìm kiếm và phân trang
+    @RequestMapping(value = "/api/user", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<Staff>> getStaffs(@RequestParam Map<String, String> params) {
+        return new ResponseEntity<List<Staff>>(staffService.getAllStaff(), HttpStatus.OK);
+    }
+
+    // API để lấy số lượng tổng cộng của nhân viên
+    @RequestMapping(value = "/api/user/count", method = RequestMethod.GET)
+    public ResponseEntity<Integer> countStaff() {
+        int count = staffService.countStaff();
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
+    // API để thêm hoặc cập nhật thông tin nhân viên
+    @RequestMapping(value = "/api/user", method = RequestMethod.POST)
+    public ResponseEntity<String> addOrUpdateStaff(@RequestBody Staff staff) {
+        boolean success = staffService.addOrUpdateStaff(staff);
+        if (success) {
+            return new ResponseEntity<>("Staff added/updated successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to add/update Staff", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // API để lấy thông tin nhân viên theo ID
+    @RequestMapping(value = "/api/user/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Staff> getStaffById(@PathVariable(value = "id") int idStaff) {
+        Staff staff = staffService.getStaffById(idStaff);
+        if (staff != null) {
+            return new ResponseEntity<>(staff, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // API để xóa nhân viên theo ID
+    @RequestMapping(value = "/api/user/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> deleteUserAPI(@PathVariable(value = "id") int id) {
+        boolean isDeleted = this.staffService.deleteStaff(id);
+        if (isDeleted) {
+            return new ResponseEntity<>("DELETE USER SUCCESS", HttpStatus.ACCEPTED);
+        }
+
+        return new ResponseEntity<>("DELETE USER FAILED", HttpStatus.BAD_REQUEST);
     }
 
 }

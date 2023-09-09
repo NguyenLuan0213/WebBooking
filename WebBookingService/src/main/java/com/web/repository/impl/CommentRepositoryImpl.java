@@ -6,6 +6,7 @@ package com.web.repository.impl;
 
 import com.web.pojo.Comments;
 import com.web.pojo.Customer;
+import com.web.pojo.Garage;
 import com.web.repository.CommentRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,8 @@ import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -44,6 +47,9 @@ public class CommentRepositoryImpl implements CommentRepository {
         CriteriaBuilder b = s.getCriteriaBuilder();
         CriteriaQuery<Comments> q = b.createQuery(Comments.class);
         Root root = q.from(Comments.class);
+        Join<Comments, Customer> cusJoin = root.join("idCustomer", JoinType.INNER);
+        Join<Comments, Garage> garaJoin = root.join("idGarage", JoinType.INNER);
+
         q.select(root);
 
         if (params != null) {
@@ -51,6 +57,10 @@ public class CommentRepositoryImpl implements CommentRepository {
 
             String kw = params.get("kw");
             if (kw != null && !kw.isEmpty()) {
+                Predicate namePredicate = b.like(cusJoin.get("name").as(String.class), String.format("%%%s%%", kw));
+//                Predicate phonePredicate = b.equal(root.get("typeOfCoach.nameTypeOfCoach").as(String.class), String.format("%%%s%%", kw));
+                Predicate addressPredicate = b.like(garaJoin.get("nameGara").as(String.class), String.format("%%%s%%", kw));
+                predicates.add(b.or(namePredicate, addressPredicate));
             }
 
             q.where(predicates.toArray(Predicate[]::new));
@@ -85,7 +95,7 @@ public class CommentRepositoryImpl implements CommentRepository {
 
         try {
             Customer idCustomer = com.getIdCustomer();
-            
+
             String comments = com.getComments();
 
             if (idCustomer == null || comments == null || comments.isEmpty()) {

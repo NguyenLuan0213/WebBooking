@@ -82,7 +82,7 @@ public class StaffRepositoryImpl implements StaffRepository {
 
                 predicates.add(b.or(nameStaffPredicate, genderPredicate, phonePredicate));
             }
-             String roles = params.get("roles");
+            String roles = params.get("roles");
             if (roles != null && !roles.isEmpty()) {
                 Predicate rolesPredicate = b.equal(root.get("roles"), roles);
                 predicates.add(rolesPredicate);
@@ -159,10 +159,13 @@ public class StaffRepositoryImpl implements StaffRepository {
     @Override
     public boolean deleteStaff(int idStaff) {
         Session s = this.Factory.getObject().getCurrentSession();
-        Staff staf = this.getStaffById(idStaff);
         try {
-            s.delete(staf);
-            return true;
+            Staff staf = s.get(Staff.class, idStaff); // Lấy đối tượng Staff theo ID
+            if (staf != null) {
+                s.delete(staf);
+                return true;
+            }
+            return false; // Trả về false nếu không tìm thấy nhân viên với ID đã cho
         } catch (HibernateException ex) {
             ex.printStackTrace();
             return false;

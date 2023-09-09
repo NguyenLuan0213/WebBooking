@@ -85,7 +85,7 @@
                             </c:choose></td>
                         <td class=" text-center">${tr.priceTran}</td>
                         <td class="text-center" >
-                            <se:authorize access="hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN')">
+                            <se:authorize access="hasAnyRole('ROLE_STAFF', 'ROLE_ADMIN','ROLE_OWNER' )">
                                 <c:url value="/viewTransporttruck/admin/transts/${tr.idTrans}" var="api" />
                                 <a href="${api}" class="btn btn-success">Cập nhật</a>
                                 <a class="btn btn-danger" onclick="deleteEntry('transts', '${api}')">Xóa</a>

@@ -5,6 +5,9 @@
 package com.web.repository.impl;
 
 import com.web.pojo.Coachs;
+import com.web.pojo.Garage;
+import com.web.pojo.Orderships;
+import com.web.pojo.Transporttruck;
 import com.web.repository.CoachsRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -44,6 +49,7 @@ public class CoachsRepositoryImpl implements CoachsRepository {
         CriteriaBuilder b = s.getCriteriaBuilder();
         CriteriaQuery<Coachs> q = b.createQuery(Coachs.class);
         Root root = q.from(Coachs.class);
+        Join<Coachs, Garage> garaJoin = root.join("idGarage", JoinType.INNER);
         q.select(root);
 
         if (params != null) {
@@ -51,7 +57,10 @@ public class CoachsRepositoryImpl implements CoachsRepository {
 
             String kw = params.get("kw");
             if (kw != null && !kw.isEmpty()) {
-                predicates.add(b.like(root.get("numberCoach").as(String.class), String.format("%%%s%%", kw)));
+                Predicate namePredicate = b.like(root.get("numberCoach").as(String.class), String.format("%%%s%%", kw));
+//                Predicate phonePredicate = b.equal(root.get("typeOfCoach.nameTypeOfCoach").as(String.class), String.format("%%%s%%", kw));
+                Predicate addressPredicate = b.like(garaJoin.get("nameGara").as(String.class), String.format("%%%s%%", kw));
+                predicates.add(b.or(namePredicate, addressPredicate));
             }
 
             String capacity = params.get("capacity");
